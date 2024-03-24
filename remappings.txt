@@ -1,0 +1,9 @@
+@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+ERC4626/=lib/properties/lib/ERC4626/contracts/
+ds-test/=lib/properties/lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
+forge-std/=lib/forge-std/src/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+properties/=lib/properties/contracts/
+@crytic/properties/contracts/=lib/properties/contracts/
+solmate/=lib/properties/lib/solmate/src/
