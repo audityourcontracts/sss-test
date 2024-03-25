@@ -22,17 +22,33 @@ contract SSSTest is Test {
         );
 
         sss20 = ERC20(sss);
+
+        // Make sure the test address has no tokens.
+        assertEq(sss20.balanceOf(address(100)), 0);
+        // Transfer the test account 1 token.
+        sss20.transfer(address(100), 1);
     }
 
-    function testTransfer() public {
-        console2.log("Deployer balance", sss20.balanceOf(address(this)));
-        // Transfer some to address(100) so they can perform the test.
-        sss20.transfer(address(100), 10 ether);
-        assertEq(sss20.balanceOf(address(100)), 10 ether);
+    function test_selfTransfer() public {
+        // setUp() gives address(100) 1 token.
 
         // As address(100)
         vm.prank(address(100));
-        sss20.transfer(address(100), 10 ether);
-        assertEq(sss20.balanceOf(address(100)), 20 ether);
+        sss20.transfer(address(100), 1); // Transfer 1 token to yourself.
+
+        //console2.log("Balance", sss20.balanceOf(address(100))); // The balance will be two.
+        assertNotEq(sss20.balanceOf(address(100)), 1);
+    }
+
+    function test_selfTransferFrom() public {
+        // setUp() gives address(100) 1 token.
+
+        vm.prank(address(100));
+        sss20.approve(address(1337), 1);
+
+        vm.prank(address(1337));
+        sss20.transferFrom(address(100), address(100), 1);
+
+        assertNotEq(sss20.balanceOf(address(100)), 1);
     }
 }
