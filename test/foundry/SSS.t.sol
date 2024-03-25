@@ -29,7 +29,7 @@ contract SSSTest is Test {
         sss20.transfer(address(100), 1);
     }
 
-    function test_selfTransfer() public {
+    function test_Foundry_selfTransfer() public {
         // setUp() gives address(100) 1 token.
 
         // As address(100)
@@ -37,10 +37,10 @@ contract SSSTest is Test {
         sss20.transfer(address(100), 1); // Transfer 1 token to yourself.
 
         //console2.log("Balance", sss20.balanceOf(address(100))); // The balance will be two.
-        assertNotEq(sss20.balanceOf(address(100)), 1);
+        assertEq(sss20.balanceOf(address(100)), 1);
     }
 
-    function test_selfTransferFrom() public {
+    function test_Foundry_selfTransferFrom() public {
         // setUp() gives address(100) 1 token.
 
         vm.prank(address(100));
@@ -49,6 +49,6 @@ contract SSSTest is Test {
         vm.prank(address(1337));
         sss20.transferFrom(address(100), address(100), 1);
 
-        assertNotEq(sss20.balanceOf(address(100)), 1);
+        assertEq(sss20.balanceOf(address(100)), 1);
     }
 }
